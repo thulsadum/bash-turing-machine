@@ -211,6 +211,7 @@ do
 		echo "# Unspecified symbol '$data'!">&2
 		exit 1;
 	fi
+	
 
 	#case $data in
 	#	"0")
@@ -238,12 +239,19 @@ do
 			((pos+=1))
 		;;
 	esac
+	
 	if [ "$pos" -lt "0" ]; then
-		pos=$bandwidth
-	fi
-	if [ "$pos" -gt "$bandwidth" ]; then
+		#pos=$bandwidth
 		pos=0
+		for (( i=bandwidth-1;i>0;i-- ))
+			do
+				band[i]="${band[$i-1]}"
+			done
+		band[0]=" "
 	fi
+	# if [ "$pos" -gt "$bandwidth" ]; then
+	# 	pos=0
+	# fi
 
 	#jump to next state
 	#echo "$index: ${states_next[$index]}"
